@@ -11,6 +11,7 @@ type FormValues = {
     twitter: string;
     facebook: string;
   };
+  phoneNumbers: string[];
 };
 
 const YouTubeForm = () => {
@@ -18,11 +19,12 @@ const YouTubeForm = () => {
     defaultValues: {
       username: "John",
       email: "",
-      channel: "",
+      channel: "channel123",
       social: {
         twitter: "",
         facebook: "",
       },
+      phoneNumbers: ["1234", "9876"],
     },
   });
   const { register, control, handleSubmit, formState } = form;
@@ -100,6 +102,24 @@ const YouTubeForm = () => {
         <div className="form-control">
           <label htmlFor="facebook">Facebook</label>
           <input type="text" id="facebook" {...register("social.facebook")} />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="primary-phone">PhoneNumbers</label>
+          <input
+            type="text"
+            id="primary-phone"
+            {...register("phoneNumbers.0")}
+          />
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="secondary-phone">PhoneNumbers</label>
+          <input
+            type="text"
+            id="secondary-phone"
+            {...register("phoneNumbers.1")}
+          />
         </div>
 
         <button>Submit</button>
