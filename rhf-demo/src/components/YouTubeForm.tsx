@@ -35,7 +35,15 @@ const YouTubeForm = () => {
       age: 0,
     },
   });
-  const { register, control, handleSubmit, formState, watch, getValues } = form;
+  const {
+    register,
+    control,
+    handleSubmit,
+    formState,
+    watch,
+    getValues,
+    setValue,
+  } = form;
   const { errors } = formState;
 
   const { fields, append, remove } = useFieldArray({
@@ -50,6 +58,14 @@ const YouTubeForm = () => {
 
   const handleGetValues = () => {
     console.log(getValues(["username", "channel"]));
+  };
+
+  const handleSetValue = () => {
+    setValue("username", "", {
+      shouldValidate: true,
+      shouldDirty: true,
+      shouldTouch: true,
+    });
   };
 
   renderCount++;
@@ -70,7 +86,6 @@ const YouTubeForm = () => {
           />
           <p className="error">{errors.username?.message}</p>
         </div>
-
         <div className="form-control">
           <label htmlFor="email">Email</label>
           <input
@@ -99,7 +114,6 @@ const YouTubeForm = () => {
           />
           <p className="error">{errors.email?.message}</p>
         </div>
-
         <div className="form-control">
           <label htmlFor="channel">Channel</label>
           <input
@@ -111,17 +125,14 @@ const YouTubeForm = () => {
           />
           <p className="error">{errors.channel?.message}</p>
         </div>
-
         <div className="form-control">
           <label htmlFor="twitter">Twitter</label>
           <input type="text" id="twitter" {...register("social.twitter")} />
         </div>
-
         <div className="form-control">
           <label htmlFor="facebook">Facebook</label>
           <input type="text" id="facebook" {...register("social.facebook")} />
         </div>
-
         <div className="form-control">
           <label htmlFor="primary-phone">PhoneNumbers</label>
           <input
@@ -130,7 +141,6 @@ const YouTubeForm = () => {
             {...register("phoneNumbers.0")}
           />
         </div>
-
         <div className="form-control">
           <label htmlFor="secondary-phone">PhoneNumbers</label>
           <input
@@ -139,7 +149,6 @@ const YouTubeForm = () => {
             {...register("phoneNumbers.1")}
           />
         </div>
-
         <div>
           <label>List of phone numbers</label>
           <div>
@@ -158,7 +167,6 @@ const YouTubeForm = () => {
             ))}
           </div>
         </div>
-
         <div className="form-control">
           <label htmlFor="age">Age</label>
           <input
@@ -172,7 +180,6 @@ const YouTubeForm = () => {
           />
           <p className="error">{errors.age?.message}</p>
         </div>
-
         <div className="form-control">
           <label htmlFor="dateOfBirth">Date of Birth</label>
           <input
@@ -185,10 +192,12 @@ const YouTubeForm = () => {
           />
           <p className="error">{errors.dateOfBirth?.message}</p>
         </div>
-
         <button>Submit</button>
         <button type="button" onClick={handleGetValues}>
           Get values
+        </button>
+        <button type="button" onClick={handleSetValue}>
+          Set value
         </button>
       </form>
       <DevTool control={control} />
