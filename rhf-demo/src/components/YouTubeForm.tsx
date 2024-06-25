@@ -35,7 +35,7 @@ const YouTubeForm = () => {
       age: 0,
     },
   });
-  const { register, control, handleSubmit, formState, watch } = form;
+  const { register, control, handleSubmit, formState, watch, getValues } = form;
   const { errors } = formState;
 
   const { fields, append, remove } = useFieldArray({
@@ -48,15 +48,9 @@ const YouTubeForm = () => {
     console.log(data);
   };
 
-  useEffect(() => {
-    const subscription = watch((value) => {
-      console.log(value);
-    });
-
-    return () => subscription.unsubscribe();
-  }, [watch]);
-
-  // const watchForm = watch();
+  const handleGetValues = () => {
+    console.log(getValues(["username", "channel"]));
+  };
 
   renderCount++;
   return (
@@ -193,6 +187,9 @@ const YouTubeForm = () => {
         </div>
 
         <button>Submit</button>
+        <button type="button" onClick={handleGetValues}>
+          Get values
+        </button>
       </form>
       <DevTool control={control} />
     </div>
