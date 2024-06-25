@@ -16,6 +16,7 @@ type FormValues = {
     number: string;
   }[];
   age: number;
+  dateOfBirth: Date;
 };
 
 const YouTubeForm = () => {
@@ -164,6 +165,19 @@ const YouTubeForm = () => {
             })}
           />
           <p className="error">{errors.age?.message}</p>
+        </div>
+
+        <div className="form-control">
+          <label htmlFor="dateOfBirth">Date of Birth</label>
+          <input
+            type="date"
+            id="dateOfBirth"
+            {...register("dateOfBirth", {
+              valueAsDate: true,
+              required: { value: true, message: "Date of Birth is required" },
+            })}
+          />
+          <p className="error">{errors.dateOfBirth?.message}</p>
         </div>
 
         <button>Submit</button>
