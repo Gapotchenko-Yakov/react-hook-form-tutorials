@@ -43,13 +43,8 @@ const YouTubeForm = () => {
     getValues,
     setValue,
   } = form;
-  const { errors, touchedFields, dirtyFields, isDirty } = formState;
-  console.log(
-    "🚀 ~ YouTubeForm ~ touchedFields, dirtyFields, isDirty :",
-    touchedFields,
-    dirtyFields,
-    isDirty
-  );
+  const { errors, touchedFields, dirtyFields, isDirty, isValid } = formState;
+  console.log(touchedFields, dirtyFields, isDirty, isValid);
 
   const { fields, append, remove } = useFieldArray({
     name: "phNumbers",
@@ -141,7 +136,6 @@ const YouTubeForm = () => {
             id="twitter"
             {...register("social.twitter", {
               disabled: watch("channel") === "",
-              required: "Enter twitter",
             })}
           />
         </div>
@@ -208,7 +202,7 @@ const YouTubeForm = () => {
           />
           <p className="error">{errors.dateOfBirth?.message}</p>
         </div>
-        <button>Submit</button>
+        <button disabled={!isDirty || !isValid}>Submit</button>
         <button type="button" onClick={handleGetValues}>
           Get values
         </button>
