@@ -43,8 +43,18 @@ const YouTubeForm = () => {
     getValues,
     setValue,
   } = form;
-  const { errors, touchedFields, dirtyFields, isDirty, isValid } = formState;
-  console.log(touchedFields, dirtyFields, isDirty, isValid);
+  const {
+    errors,
+    touchedFields,
+    dirtyFields,
+    isDirty,
+    isValid,
+    isSubmitting,
+    isSubmitted,
+    isSubmitSuccessful,
+    submitCount,
+  } = formState;
+  console.log({ isSubmitting, isSubmitted, isSubmitSuccessful, submitCount });
 
   const { fields, append, remove } = useFieldArray({
     name: "phNumbers",
@@ -202,7 +212,7 @@ const YouTubeForm = () => {
           />
           <p className="error">{errors.dateOfBirth?.message}</p>
         </div>
-        <button disabled={!isDirty || !isValid}>Submit</button>
+        <button disabled={!isDirty || !isValid || isSubmitting}>Submit</button>
         <button type="button" onClick={handleGetValues}>
           Get values
         </button>
