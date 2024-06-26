@@ -1,6 +1,5 @@
 import { useForm, useFieldArray } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
-import { useEffect } from "react";
 
 let renderCount = 0;
 
@@ -44,7 +43,13 @@ const YouTubeForm = () => {
     getValues,
     setValue,
   } = form;
-  const { errors } = formState;
+  const { errors, touchedFields, dirtyFields, isDirty } = formState;
+  console.log(
+    "🚀 ~ YouTubeForm ~ touchedFields, dirtyFields, isDirty :",
+    touchedFields,
+    dirtyFields,
+    isDirty
+  );
 
   const { fields, append, remove } = useFieldArray({
     name: "phNumbers",
