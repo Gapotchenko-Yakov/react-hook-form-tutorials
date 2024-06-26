@@ -1,4 +1,4 @@
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, FieldErrors } from "react-hook-form";
 import { DevTool } from "@hookform/devtools";
 
 let renderCount = 0;
@@ -61,6 +61,10 @@ const YouTubeForm = () => {
     console.log(data);
   };
 
+  const onError = (errors: FieldErrors<FormValues>) => {
+    console.log("Form errors", errors);
+  };
+
   const handleGetValues = () => {
     console.log(getValues(["username", "channel"]));
   };
@@ -79,7 +83,7 @@ const YouTubeForm = () => {
       <h1>YouTube Form {renderCount / 2}</h1>
       {/* <h2>Watched value: {JSON.stringify(watchForm)}</h2> */}
 
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
+      <form onSubmit={handleSubmit(onSubmit, onError)} noValidate>
         <div className="form-control">
           <label htmlFor="username">Username</label>
           <input
