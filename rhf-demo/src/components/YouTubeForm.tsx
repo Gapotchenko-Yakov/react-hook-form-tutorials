@@ -136,7 +136,7 @@ const YouTubeForm = () => {
             type="text"
             id="twitter"
             {...register("social.twitter", {
-              disabled: true,
+              disabled: watch("channel") === "",
               required: "Enter twitter",
             })}
           />
